@@ -6,7 +6,7 @@
 /*   By: vlaggoun <vlaggoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 18:16:10 by vlaggoun          #+#    #+#             */
-/*   Updated: 2025/04/01 16:27:02 by vlaggoun         ###   ########.fr       */
+/*   Updated: 2025/04/01 19:05:14 by vlaggoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 Fixed::Fixed()
 {
-
+	std::cout << "Default constructor called" << std::endl;
 }
 Fixed::~Fixed()
 {
-
+	std::cout << "Destructor called" << std::endl;
 }
 int	Fixed::getvalue() const
 {
@@ -27,32 +27,32 @@ int	Fixed::getvalue() const
 
 Fixed	Fixed::operator*(const Fixed &value) const
 {
-	return (this->_fixed_value * value.getvalue());
+	return (this->_fixed_value * value.getRawBits());
 }
 
 Fixed	Fixed::operator+(const Fixed &value) const
 {
-	return (this->_fixed_value + value.getvalue());
+	return (this->_fixed_value + value.getRawBits());
 }
 
 Fixed	Fixed::operator-(const Fixed &value) const
 {
-	return (this->_fixed_value - value.getvalue());
+	return (this->_fixed_value - value.getRawBits());
 }
 
 Fixed	Fixed::operator/(const Fixed &value) const
 {
-	return (this->_fixed_value / value.getvalue());
+	return (this->_fixed_value / value.getRawBits());
 }
 
 bool	Fixed::operator> (const Fixed &value) const
 {
-	return (value.getRawBits() < value.getRawBits());
+	return (this->_fixed_value > value.getRawBits());
 }
 
 bool	Fixed::operator< (const Fixed &value) const
 {
-	return (value.getRawBits() > value.getRawBits());
+	return (this->_fixed_value < value.getRawBits());
 }
 
 bool	Fixed::operator>= (const Fixed &value)
@@ -67,12 +67,12 @@ bool	Fixed::operator<= (const Fixed &value)
 
 bool	Fixed::operator== (const Fixed &value)
 {
-	return (value.getRawBits() == value.getRawBits());
+	return (this->_fixed_value == value.getRawBits());
 }
 
 bool	Fixed::operator!= (const Fixed &value)
 {
-	return !(value.getRawBits() == value.getRawBits());
+	return !(this->_fixed_value == value.getRawBits());
 }
 
 Fixed	&Fixed::operator++()
@@ -163,7 +163,7 @@ float	Fixed::toFloat(void) const
 std::ostream	&operator<< (std::ostream &out, Fixed const &value)
 {
 	std::cout << std::fixed;
-	std::cout << std::setprecision(2);
+	std::cout << std::setprecision(8);
 	out << value.toFloat();
 	return (out);
 }
