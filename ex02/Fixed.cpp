@@ -6,7 +6,7 @@
 /*   By: vlaggoun <vlaggoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 18:16:10 by vlaggoun          #+#    #+#             */
-/*   Updated: 2025/04/01 16:01:24 by vlaggoun         ###   ########.fr       */
+/*   Updated: 2025/04/01 16:27:02 by vlaggoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,6 +168,20 @@ std::ostream	&operator<< (std::ostream &out, Fixed const &value)
 	return (out);
 }
 
+Fixed::Fixed(int const integer)
+{
+	std::cout << "Int constructor called" << std::endl;
+	this->_fixed_value = integer <<_nbr_bits;
+}
 
+Fixed::Fixed(float const flo)
+{
+	std::cout << "Float constructor called" << std::endl;
+	this->_fixed_value = flo * (1 << _nbr_bits);
+}
 
-
+Fixed::Fixed(const Fixed &value)
+{
+	std::cout << "Copy constructor called" << std::endl;
+	*this = value;
+}
